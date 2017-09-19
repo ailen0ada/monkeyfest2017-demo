@@ -12,18 +12,11 @@ namespace MyFirstMacApp
 	[Register ("ViewController")]
 	partial class ViewController
 	{
-		[Outlet]
-		AppKit.NSTextField NameField { get; set; }
-
 		[Action ("ShowGreeting:")]
 		partial void ShowGreeting (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (NameField != null) {
-				NameField.Dispose ();
-				NameField = null;
-			}
 		}
 	}
 }

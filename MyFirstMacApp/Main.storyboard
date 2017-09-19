@@ -681,6 +681,13 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="Name" id="tBD-H9-Shb">
+                                        <dictionary key="options">
+                                            <string key="NSNullPlaceholder">Name</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CW6-oL-gW7">
                                 <rect key="frame" x="194" y="192" width="93" height="32"/>
@@ -704,9 +711,6 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="Kcc-qu-1Z3" secondAttribute="trailing" constant="100" id="v7j-OB-QHa"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="NameField" destination="Kcc-qu-1Z3" id="MuJ-sy-5zu"/>
-                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

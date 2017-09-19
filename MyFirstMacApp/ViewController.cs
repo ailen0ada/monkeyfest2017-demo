@@ -33,7 +33,7 @@ namespace MyFirstMacApp
 
         partial void ShowGreeting(NSObject sender)
         {
-            var msg = $"Hello, {this.NameField.StringValue}!";
+            var msg = $"Hello, {this.Name}!";
             var alert = new NSAlert
             {
                 MessageText = msg,
@@ -41,6 +41,21 @@ namespace MyFirstMacApp
                 AlertStyle = NSAlertStyle.Informational
             };
             alert.RunSheetModal(this.View.Window);
+        }
+
+        NSString name;
+
+        [Outlet]
+        public NSString Name
+        {
+            get => name;
+
+            set
+            {
+                this.WillChangeValue(nameof(Name));
+                name = value;
+                this.DidChangeValue(nameof(Name));
+            }
         }
     }
 }
