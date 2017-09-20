@@ -12,11 +12,18 @@ namespace MyFirstMacApp
 	[Register ("ViewController")]
 	partial class ViewController
 	{
+		[Outlet]
+		AppKit.NSTableView HistoryTableView { get; set; }
+
 		[Action ("ShowGreeting:")]
 		partial void ShowGreeting (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (HistoryTableView != null) {
+				HistoryTableView.Dispose ();
+				HistoryTableView = null;
+			}
 		}
 	}
 }

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using AppKit;
 using Foundation;
 
 namespace MyFirstMacApp
 {
-    public partial class ViewController : NSViewController
+    public partial class ViewController : NSViewController, INSTableViewDataSource, INSTableViewDelegate
     {
         public ViewController(IntPtr handle) : base(handle)
         {
@@ -17,6 +17,8 @@ namespace MyFirstMacApp
 
             // Do any additional setup after loading the view.
             Friend = new Person { Honorific = Honorifics[0] };
+            HistoryTableView.DataSource = this;
+            HistoryTableView.Delegate = this;
         }
 
         public override NSObject RepresentedObject
@@ -34,6 +36,9 @@ namespace MyFirstMacApp
 
         partial void ShowGreeting(NSObject sender)
         {
+            histories.Add(new Person { Name = friend.Name, Honorific = friend.Honorific });
+            HistoryTableView.ReloadData();
+
             var msg = $"Hello, {this.Friend.Name}-{this.Friend.Honorific}!";
             var alert = new NSAlert
             {
@@ -64,6 +69,36 @@ namespace MyFirstMacApp
 
         [Outlet]
         public NSString[] Honorifics { get; } = new[] { (NSString)"san", (NSString)"kun", (NSString)"chan", (NSString)"sama" };
+
+        private List<Person> histories = new List<Person>();
+
+        [Export("numberOfRowsInTableView:")]
+        public nint GetRowCount(NSTableView tableView)
+        {
+            return histories.Count;
+        }
+
+        [Export("tableView:viewForTableColumn:row:")]
+        public NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
+        {
+            var item = histories[(int)row];
+            var text = item.ValueForKey((NSString)tableColumn.Identifier) ?? NSString.Empty;
+
+            var view = (NSTableCellView)tableView.MakeView(tableColumn.Identifier, this);
+            view.TextField.ObjectValue = text;
+            return view;
+        }
+
+        [Export("tableViewSelectionDidChange:")]
+        public void SelectionDidChange(NSNotification notification)
+        {
+            var row = HistoryTableView.SelectedRow;
+            if (row < 0) return;
+
+            var item = histories[(int)row];
+            friend.Name = item.Name;
+            friend.Honorific = item.Honorific;
+        }
     }
 
     [Register(nameof(Person))]
