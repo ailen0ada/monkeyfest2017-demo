@@ -682,8 +682,9 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="Name" id="tBD-H9-Shb">
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="Friend.Name" id="pWN-XJ-Sdl">
                                         <dictionary key="options">
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <string key="NSNullPlaceholder">Name</string>
                                         </dictionary>
                                     </binding>
@@ -700,15 +701,50 @@ DQ
                                 </buttonCell>
                                 <connections>
                                     <action selector="ShowGreeting:" target="XfG-lQ-9wD" id="q5G-FT-wPk"/>
+                                    <binding destination="XfG-lQ-9wD" name="enabled" keyPath="Friend.NameLength" id="fVl-2Z-Der"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VT4-nh-EcH">
+                                <rect key="frame" x="386" y="230" width="37" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="lcD-Hv-UUu">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="e7O-Pn-NHV"/>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="Friend.NameLength" id="ibC-Cu-egu"/>
+                                </connections>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="biQ-fy-0R5">
+                                <rect key="frame" x="307" y="196" width="76" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MdC-U0-rGV" id="TnH-te-O7q">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="goc-Bb-ud8">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="MdC-U0-rGV"/>
+                                            <menuItem title="Item 2" id="hVd-i2-afR"/>
+                                            <menuItem title="Item 3" id="etw-oG-Jjt"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="contentValues" keyPath="Honorifics" id="bma-wy-ID0"/>
+                                    <binding destination="XfG-lQ-9wD" name="selectedValue" keyPath="Friend.Honorific" previousBinding="bma-wy-ID0" id="GEd-qn-6JT"/>
+                                </connections>
+                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstItem="CW6-oL-gW7" firstAttribute="centerX" secondItem="Kcc-qu-1Z3" secondAttribute="centerX" id="Kwd-w7-Eya"/>
                             <constraint firstItem="CW6-oL-gW7" firstAttribute="top" secondItem="Kcc-qu-1Z3" secondAttribute="bottom" constant="8" id="YHf-yQ-p1J"/>
+                            <constraint firstItem="VT4-nh-EcH" firstAttribute="centerY" secondItem="Kcc-qu-1Z3" secondAttribute="centerY" id="ZI7-cJ-x36"/>
+                            <constraint firstItem="VT4-nh-EcH" firstAttribute="leading" secondItem="Kcc-qu-1Z3" secondAttribute="trailing" constant="8" symbolic="YES" id="ag5-Rt-Toc"/>
                             <constraint firstItem="Kcc-qu-1Z3" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="100" id="b9w-jk-RQG"/>
+                            <constraint firstItem="biQ-fy-0R5" firstAttribute="top" secondItem="Kcc-qu-1Z3" secondAttribute="bottom" constant="8" id="buf-OF-oIa"/>
                             <constraint firstItem="Kcc-qu-1Z3" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="qd3-tl-QQe"/>
                             <constraint firstAttribute="trailing" secondItem="Kcc-qu-1Z3" secondAttribute="trailing" constant="100" id="v7j-OB-QHa"/>
+                            <constraint firstItem="biQ-fy-0R5" firstAttribute="trailing" secondItem="Kcc-qu-1Z3" secondAttribute="trailing" id="v7x-8q-cYq"/>
                         </constraints>
                     </view>
                 </viewController>
